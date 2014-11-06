@@ -11,12 +11,12 @@
     <context:annotation-config/>
     <context:component-scan base-package="org.demo"/>
 
-    <bean id="jade.dataSource.julytea.gossip.dao"
+    <bean id="jade.dataSource.org.demo.dao"
           class="org.apache.commons.dbcp.BasicDataSource"
           destroy-method="close">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <property name="url"
-                  value="jdbc:mysql://10.1.1.208:3306/gossip-test?useUnicode=false&amp;character_set_client=utf8mb4"/>
+                  value="jdbc:mysql://127.0.0.1:3306/demo?useUnicode=false&amp;character_set_client=utf8mb4"/>
         <property name="username" value="root"/>
         <property name="password" value="root"/>
     </bean>
