@@ -1,0 +1,29 @@
+apply plugin: 'jetty'
+apply plugin: 'war'     // web项目的打包格式
+apply plugin: 'idea'    // ide的支持，eclipse则填写eclipse
+
+war.archiveName = 'ROOT.war'
+
+
+group = 'cinao'
+version = '1.0.0'
+compileJava.options.encoding = 'UTF-8' // 设置默认字符编码为UTF-8
+
+repositories {
+    mavenCentral()    // 使用中央maven库, 在公司中, 通常会有自己的maven库
+}
+
+dependencies {        // 配置项目的jar包依赖
+
+    compile 'commons-dbcp:commons-dbcp:1.4'         // 数据库链接池
+
+    compile 'com.54chen:paoding-rose-scanning:1.0'  // paoding-rose
+    compile 'com.54chen:paoding-rose:1.0'
+    compile 'com.54chen:paoding-rose-jade:1.1'
+    compile 'mysql:mysql-connector-java:5.1.30'
+
+    testCompile 'org.springframework:spring-test:2.5.6.SEC02'
+    testCompile 'junit:junit:4.11'                  // 单元测试
+}
+
+
