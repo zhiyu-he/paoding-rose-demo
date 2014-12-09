@@ -60,30 +60,44 @@ paoding-rose-demo
 3. 配置web.xml文件
    
    ```
-   <?xml version="1.0" encoding="utf-8"?>
-   <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-    http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
-    http://www.springframework.org/schema/context
-    http://www.springframework.org/schema/context/spring-context-2.5.xsd"
-       default-lazy-init="true">
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         id="WebApp_ID" version="2.5">
+    <display-name>yangcong</display-name>
 
-   <context:annotation-config/>
-   <context:component-scan base-package="org.demo"/>
-   
-   <bean id="jade.dataSource.org.demo.dao"
-          class="org.apache.commons.dbcp.BasicDataSource"
-          destroy-method="close">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url"
-                  value="jdbc:mysql://127.0.0.1:3306/demo?useUnicode=false&amp;character_set_client=utf8mb4"/>
-        <property name="username" value="root"/>
-        <property name="password" value="root"/>
-    </bean>
-   
-   </beans>
+    <!-- 字符编码 -->
+    <filter>
+        <filter-name>characterEncodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>characterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
+    <filter>
+        <filter-name>roseFilter</filter-name>
+        <filter-class>net.paoding.rose.RoseFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>roseFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
+    </filter-mapping>
+</web-app>
    ```
    
 4. 填写相关demo代码
