@@ -169,3 +169,29 @@ paoding-rose-demo
    ```
 
 #### 注意事项
+
+### Paoding 功能Demo
+
+#### Interceptor
+
+1. 参考文档
+    * [paoding google code wiki](https://code.google.com/p/paoding-rose/wiki/Rose_Code_Fragment_Interceptor#作用范围与实际拦截的区别)
+
+paoding-rose中的Interceptor，我倾向于使用`全局`与`特定`作为区分，并在Demo中，Interceptor位于`org.demo.interceptor`package下
+对于Interceptor解析如下问题
+
+1. Interceptor的配置
+2. 多个Interceptor的执行顺序（待续）
+
+###### Interceptor的配置
+1. xx.java extends `ControllerInterceptorAdapter`
+2. 重写相关方法
+    * 对于全局Interceptor重写 `before(Invocation inv, Object instruction):Object` 与 `after(Invocation inv, Object instruction):Object`
+	* 对于特定Interceptor重写 `getRequiredAnnotationClass():`、`before(Invocation inv, Object instruction):Object`、`after(Invocation inv, Object instruction):Object`
+3. 配置applicationContext
+
+```
+    <!-- 配置Interceptor -->
+    <bean class="org.demo.interceptor.GlobalInterceptor"/>
+    <bean class="org.demo.interceptor.LoginInterceptor"/>
+```

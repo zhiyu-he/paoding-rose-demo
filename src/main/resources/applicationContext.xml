@@ -13,6 +13,10 @@
 
     <bean id="userService" class="org.demo.service.UserService"/>
 
+    <!-- 配置Interceptor -->
+    <bean class="org.demo.interceptor.GlobalInterceptor"/>
+    <bean class="org.demo.interceptor.LoginInterceptor"/>
+
     <bean id="jade.dataSource.org.demo.dao"
           class="org.apache.commons.dbcp.BasicDataSource"
           destroy-method="close">

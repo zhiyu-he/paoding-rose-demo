@@ -7,7 +7,7 @@ import net.paoding.rose.web.annotation.rest.Get;
  * @author hezhiyu on 14/11/6.
  */
 @Path("/")
-public class DemoController {
+public class WelcomeController {
 
     @Get("hi")
     public String sayHi() {
