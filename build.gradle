@@ -21,6 +21,7 @@ dependencies {        // 配置项目的jar包依赖
     compile 'com.54chen:paoding-rose:1.0'
     compile 'com.54chen:paoding-rose-jade:1.1'
     compile 'mysql:mysql-connector-java:5.1.30'
+    compile 'org.quartz-scheduler:quartz:1.8.5'     // 定时任务
 
     testCompile 'org.springframework:spring-test:2.5.6.SEC02'
     testCompile 'junit:junit:4.11'                  // 单元测试

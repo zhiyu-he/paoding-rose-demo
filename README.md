@@ -195,3 +195,22 @@ paoding-rose中的Interceptor，我倾向于使用`全局`与`特定`作为区�
     <bean class="org.demo.interceptor.GlobalInterceptor"/>
     <bean class="org.demo.interceptor.LoginInterceptor"/>
 ```
+
+###### 集成quartz job
+
+1. 在build.gradle中配置jar包依赖`compile 'org.quartz-scheduler:quartz:1.8.5'`
+2. 在配置bean对象, e.g `org.demo.quartz.QuartzJob`
+3. 在applicationContext中进行相关配置, e.g `src/main/resources/applicationContext.xml`
+4. 打WAR包,扔到web容器中, 结果如下
+
+```
+信息: [init] rose initialized, 2 modules loaded, cost 889ms! (version=1.0.1-20100805)
+2015-04-07 14:40:37.103:INFO:ROOT:main: [init] rose initialized, 2 modules loaded, cost 889ms! (version=1.0.1-20100805)
+2015-04-07 14:40:37.128:INFO:oejsh.ContextHandler:main: Started o.e.j.w.WebAppContext@7b7f9803{/,file:/private/var/folders/lb/qlsp55px2yvb4mkwx3zxg42r0000gn/T/jetty-0.0.0.0-8080-ROOT.war-_-any-1826129721453283633.dir/webapp/,AVAILABLE}{/ROOT.war}
+2015-04-07 14:40:37.154:INFO:oejs.ServerConnector:main: Started ServerConnector@7b543c23{HTTP/1.1}{0.0.0.0:8080}
+2015-04-07 14:40:37.155:INFO:oejs.Server:main: Started @4681ms
+I'm a quartz job work~~ time: Tue Apr 07 14:41:00 CST 2015
+I'm a quartz job work~~ time: Tue Apr 07 14:42:00 CST 2015
+I'm a quartz job work~~ time: Tue Apr 07 14:43:00 CST 2015
+I'm a quartz job work~~ time: Tue Apr 07 14:44:00 CST 2015
+```

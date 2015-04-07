@@ -17,6 +17,31 @@
     <bean class="org.demo.interceptor.GlobalInterceptor"/>
     <bean class="org.demo.interceptor.LoginInterceptor"/>
 
+    <!-- 配置 quartz job bean -->
+    <bean id="quartzJobDemo" class="org.demo.quartz.QuartzJob"/>
+
+    <!-- 配置 quartz MethodInvokingBean, 即定时任务的执行方法 -->
+    <bean id="quartzJobInvoke" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="quartzJobDemo"/>
+        <property name="targetMethod" value="doSomeQuartzWork"/>
+    </bean>
+
+    <!-- 配置 quartz job的触发器, 即执行周期,
+    参考: http://www.quartz-scheduler.org/documentation/quartz-1.x/tutorials/TutorialLesson06-->
+    <bean id="quartzJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="quartzJobInvoke"/>
+        <property name="cronExpression" value="0 0/1 * * * ?"/> <!--每5分钟执行一次-->
+    </bean>
+
+    <!-- scheduler factory -->
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean" lazy-init="false">
+        <property name="triggers">
+            <list>
+                <ref local="quartzJobTrigger" />
+            </list>
+        </property>
+    </bean>
+
     <bean id="jade.dataSource.org.demo.dao"
           class="org.apache.commons.dbcp.BasicDataSource"
           destroy-method="close">
