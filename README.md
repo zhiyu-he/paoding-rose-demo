@@ -214,3 +214,31 @@ I'm a quartz job work~~ time: Tue Apr 07 14:42:00 CST 2015
 I'm a quartz job work~~ time: Tue Apr 07 14:43:00 CST 2015
 I'm a quartz job work~~ time: Tue Apr 07 14:44:00 CST 2015
 ```
+
+###### 以Main方法启动Paoding
+
+paoding是一套web-framework, 在`main`方法启动的场景下会有:
+
+1. 测试Service  
+    如果是Service 仅需要一枚标准的Spring applicationContext.xml即可
+2. 测试DAO  
+    如果是DAO, 则需要引入`applicationContext.xml`与`applicationContext-jade.xml`
+
+PS: 一个重点，要保证所有的配置文件与编译后的classes在同一个文件夹下
+
+代码片段如下，完整的参考项目中的[PaodingStart.java](https://github.com/zhiyu-he/paoding-rose-demo/blob/master/src/main/java/org/demo/main/PaodingStart.java)
+
+```
+
+    public static void main(String[] args) {
+        String[] applicationContextArr = new String[] {"applicationContext.xml", "applicationContext-jade.xml"};
+
+        ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext(applicationContextArr);
+
+        UserService userService = (UserService)ctx.getBean("userService");
+
+        String username = userService.getUserNameById(1001278L);
+        System.out.println(username);
+
+    }
+```

@@ -10,8 +10,8 @@ public class PaodingStart {
 
 
     public static void main(String[] args) {
-        String[] applicationContextArr = new String[] {"applicationContext.xml", "applicationContext-jade.xml"};
 
+        String[] applicationContextArr = new String[] {"applicationContext.xml", "applicationContext-jade.xml"};
         ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext(applicationContextArr);
 
         UserService userService = (UserService)ctx.getBean("userService");
