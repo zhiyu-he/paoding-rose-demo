@@ -242,3 +242,29 @@ PS: 一个重点，要保证所有的配置文件与编译后的classes在同一
 
     }
 ```
+
+#### 发布paoding可识别的Jar包
+
+[根据官方wiki](https://code.google.com/p/paoding-rose/wiki/Rose_Code_Fragment_Interceptor#全局拦截器)的解释，paoding的`Root Context`由:
+
+
+>WEB-INF/applicationContext*.xml、classes/applicationContext*.xml、xxx.jar/applicationContext*.xml组成的ApplicationContext。
+
+
+所以，引申出的关键问题为：`如何配置一个Rose可识别的Jar包?`
+
+方法为:
+
+
+>为了使jar文件根目录下的applicationContext*.xml能够被rose“认识到”，你需要在xxx.jar/META-INF下创建一个rose.properties文件，
+>并写入一个属性rose=applicationContext 。如果没有这个属性，即使你的xxx.jar包根目录含有applicationContext*.xml文件，也不会被rose识别。
+
+对于`gradle`与`maven`工程可以采用如下的项目结构:
+
+* 在`resource`文件夹下创建`META-INF`目录
+* 将`rose.properties`放置在改目录下
+
+验证方式:
+
+通过命令`gradle build`进行打包，而后解压即可在`classpath`或`Jar包的META-INF`中看到`rose.properties`文件.
+
